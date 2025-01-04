@@ -1,0 +1,18 @@
+apiVersion: argoProj.io/v1alpha1
+kind: Application
+metadata:
+  name: complete-devops-project
+  namespace: argocd
+spec:
+  project: default
+  source: 
+    repoURL: "https://github.com/Hirusha1-cpu/complete-devops-project"
+    targetRevision: HEAD
+    path: complete-devops-project-time-printer
+  destination: 
+    server: "https://kubernetes.default.svc"
+    namespace: default  
+  syncPolicy: 
+    automated:
+      prune: true
+      selfHeal: true  

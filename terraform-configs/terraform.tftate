@@ -1,10 +1,87 @@
 {
   "version": 4,
   "terraform_version": "1.5.7",
-  "serial": 3,
+  "serial": 11,
   "lineage": "a05a42b2-1b65-8eeb-9c6e-4d531dcdb2c6",
   "outputs": {},
   "resources": [
+    {
+      "mode": "managed",
+      "type": "helm_release",
+      "name": "argocd",
+      "provider": "provider[\"registry.terraform.io/hashicorp/helm\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "atomic": false,
+            "chart": "argo-cd",
+            "cleanup_on_fail": false,
+            "create_namespace": true,
+            "dependency_update": false,
+            "description": null,
+            "devel": null,
+            "disable_crd_hooks": false,
+            "disable_openapi_validation": false,
+            "disable_webhooks": false,
+            "force_update": false,
+            "id": "argocd",
+            "keyring": null,
+            "lint": false,
+            "manifest": null,
+            "max_history": 0,
+            "metadata": [
+              {
+                "app_version": "v2.13.3",
+                "chart": "argo-cd",
+                "first_deployed": 1736009160,
+                "last_deployed": 1736009160,
+                "name": "argocd",
+                "namespace": "argocd",
+                "notes": "In order to access the server UI you have the following options:\n\n1. kubectl port-forward service/argocd-server -n argocd 8080:443\n\n    and then open the browser on http://localhost:8080 and accept the certificate\n\n2. enable ingress in the values file `server.ingress.enabled` and either\n      - Add the annotation for ssl passthrough: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-1-ssl-passthrough\n      - Set the `configs.params.\"server.insecure\"` in the values file and terminate SSL at your ingress: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multiple-ingress-objects-and-hosts\n\n\nAfter reaching the UI the first time you can login with username: admin and the random password generated during the installation. You can find the password by running:\n\nkubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=\"{.data.password}\" | base64 -d\n\n(You should delete the initial secret afterwards as suggested by the Getting Started Guide: https://argo-cd.readthedocs.io/en/stable/getting_started/#4-login-using-the-cli)\n",
+                "revision": 1,
+                "values": "{\"server\":{\"service\":{\"type\":\"ClusterIP\"}}}",
+                "version": "7.7.13"
+              }
+            ],
+            "name": "argocd",
+            "namespace": "argocd",
+            "pass_credentials": false,
+            "postrender": [],
+            "recreate_pods": false,
+            "render_subchart_notes": true,
+            "replace": false,
+            "repository": "https://argoproj.github.io/argo-helm",
+            "repository_ca_file": null,
+            "repository_cert_file": null,
+            "repository_key_file": null,
+            "repository_password": null,
+            "repository_username": null,
+            "reset_values": false,
+            "reuse_values": false,
+            "set": [],
+            "set_list": [],
+            "set_sensitive": [],
+            "skip_crds": false,
+            "status": "deployed",
+            "timeout": 300,
+            "upgrade_install": null,
+            "values": [
+              "    server:\n        service:\n            type: ClusterIP\n"
+            ],
+            "verify": false,
+            "version": "7.7.13",
+            "wait": true,
+            "wait_for_jobs": false
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "minikube_cluster.minikube_docker"
+          ]
+        }
+      ]
+    },
     {
       "mode": "managed",
       "type": "minikube_cluster",
@@ -28,8 +105,8 @@
             "binary_mirror": null,
             "cache_images": true,
             "cert_expiration": 1576800,
-            "client_certificate": "-----BEGIN CERTIFICATE-----\nMIIDITCCAgmgAwIBAgIBAjANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p\na3ViZUNBMB4XDTI1MDEwMzA2MTkwN1oXDTI4MDEwNDA2MTkwN1owMTEXMBUGA1UE\nChMOc3lzdGVtOm1hc3RlcnMxFjAUBgNVBAMTDW1pbmlrdWJlLXVzZXIwggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC5tTZ30JtbTxgHljkF1IrJWWeiBy7k\nK5/y+kDusd2m8+1hs6oTyD2oq0udLeOWegPOsWtHSi4nR+p/kd3OzjPRw8lBGsvy\nSWLsbMZ1N8L5h0cq6Csr0kJIMGg/hZnTCj8g2L/+US+FvUOi3VPTCJ41pEG7Pgjs\npC9lyejeqwFtjD4c4hcbLyTWdAF5O84jKxEftzU8xTKpPfX8j5+TgJbwG0dNAFon\n0DHMgsUwKkET14a2/4iSQW4RAp0WLVZ7ho7AhU5AGI+FY84/kRUVphlVNoheBLxF\nlm7v+7UL+jHe6HpvVkemDDks2Z/f4LVZBxyu7nhF+VU2oH6uEsvkhdsFAgMBAAGj\nYDBeMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUH\nAwIwDAYDVR0TAQH/BAIwADAfBgNVHSMEGDAWgBRUn2jrfmMhDL2qFq1u2junHucp\nSDANBgkqhkiG9w0BAQsFAAOCAQEABCVeG1k6J3dhZuxf0HQkRs7AtAw9BvaibSyZ\nu8dawaI8LJJJ+F9o/ghDjApVUERymJwXERWxYDzku2BBs0+/vDYoRoWDBYkmuDYX\nbF0l47+vb49EMaUdoBDimQ6ZJqWp8H3YdJJl9RH8r5zUEd+knXugQMshq49bued3\n4LUJwnPwaVopMARQ6AgPrsRtud2vuBWs/OCb6CGsuRSpymBydHT5GaU3ZnuCFG6H\nTv6V1A1OL5VGyfNIPC9IZFb9pcFc4Tgym90z2GbakS5HQRDoFJrk6wzlnGsaV/da\nWFzdS4eaAPn4/qJlljGxKz/9o40Zd2Sfyq6c5DxgFTmVqKDbvw==\n-----END CERTIFICATE-----\n",
-            "client_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAubU2d9CbW08YB5Y5BdSKyVlnogcu5Cuf8vpA7rHdpvPtYbOq\nE8g9qKtLnS3jlnoDzrFrR0ouJ0fqf5Hdzs4z0cPJQRrL8kli7GzGdTfC+YdHKugr\nK9JCSDBoP4WZ0wo/INi//lEvhb1Dot1T0wieNaRBuz4I7KQvZcno3qsBbYw+HOIX\nGy8k1nQBeTvOIysRH7c1PMUyqT31/I+fk4CW8BtHTQBaJ9AxzILFMCpBE9eGtv+I\nkkFuEQKdFi1We4aOwIVOQBiPhWPOP5EVFaYZVTaIXgS8RZZu7/u1C/ox3uh6b1ZH\npgw5LNmf3+C1WQccru54RflVNqB+rhLL5IXbBQIDAQABAoIBAQCpwpqQ+nQaCvp3\nbP6hcsKP/xd6CUD3OV3U2qliydtKE++rAXb28HRU7ImJnHpQgydZ2dusZoY8SER3\n61qtAthh56zgw+Mtj6JLZ8AfRSMJwXzwHx3fyCvpG78gWjvcrKA6oYkYrRRZGENs\n7RAEePtPI+EmjjXQROJDFUi3y/DZNuxa1InN+1JnIkvEiYgfUd876qN4XoQQiAO/\nr5iMd9vmX5EyeEWjM60VzAvxwawKe2JGNT1uz+ebtIkqLAZeRKTVOnBPN+jKAOcG\n3XgcGF/ldfWUpf55ogvjw4ssQWuA67NAAvpz9vMEDdi1pHDnuFcHhjmaDG5DUit1\nv0witLO9AoGBANGiUt3zawuPO4hilaCg/U/f4HR+H4ckl/QHrV+VsFuw4Sc0Uwwo\nddQ5lOcZlCzeWr0Rvwa/2ThZITaBpKO8/OKkgvqR/mHI2pjdL0T84QetPoYOwdu+\nakbHyuadfUPcruyiJv+1d5ODBBPlEytKck1e4nqRBZAtHuZiJ6+M7DabAoGBAOLI\nKiBdVWn94tkccB6gMpb3rKxvNZrXAScWVR+94qfaMNVHFwNqjD6n28WYaz7rG3Ng\nbkUQ6cl2ypDIdviMlsKxi/ZxBEUruGaq4ei80om4LoV5vg791efJgAfiijYxil8I\ne3B4h3S8YVXVImszKrv5FlKudg+WaDr+I70sxn7fAoGBAJo8Ta/TGl0E4w4zSldG\nW1lbJC9RZCzwNYRr6Zk77udnOiC4FKoLUrX0L6PgY+6nIiedWOjEWjNlEFSkCdgW\nghDWbS+iHoEfYAW8Jr0hOQeG5UuIrATbEiJFePk3wiQdx+1+WCcnAnVbnbJthi8B\ntRtLxmHbNTagm+1xJjW4/0olAoGBAJFs3mbGs0E2x8OGEvfwrsBUruwcnHlgqqKQ\nFaI3OCN/LZV28vED4E9FgQ8jAJLmXUINcmjjwaepf5h8lJ4qOXs8M46jRqO8t5FO\nv3NpsnESJPL+8LvYVtU+R9XGle7OsfbjD5U+FU7shlZuSJYJx7umrYPz0E2Km+hI\nlE55aghtAoGAS7j6lKCUr0HHoZPnPkuLqrf52mhWNJbiGN/ckQedX990gedc8Q8S\nJk9eJmJPB64SgQhgon81Crg3tMP1yYsbowAUbF6KmfGo3xVBTAusTeb/DQBiiAwH\nqiOuf55ooRXIqOyu7mxD0RlzHtkQWMyKEgZU/pEO9bN07tSoCMQeHcI=\n-----END RSA PRIVATE KEY-----\n",
+            "client_certificate": "-----BEGIN CERTIFICATE-----\nMIIDITCCAgmgAwIBAgIBAjANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p\na3ViZUNBMB4XDTI1MDEwMzE2NDUyNFoXDTI4MDEwNDE2NDUyNFowMTEXMBUGA1UE\nChMOc3lzdGVtOm1hc3RlcnMxFjAUBgNVBAMTDW1pbmlrdWJlLXVzZXIwggEiMA0G\nCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDYdt2RT4jqtcdLp4pHjesZhLTXVyGc\nrcwo8U/NXRFAKzAsznQagzbesyYFpR8v0cuvEh1N0fblvFaX8kAYse441QPFzgop\nok0Ii6DKbd9X2ac6g7KBbMh6/B2LpmoSh7ryfqSYLucfNdqdmOPiXIhi8HUoXtBH\n+PNQnY7+f8PlMsvkCHtnUvpgQAcd6wbuJFBHQTVkAgjAZZzAMreZknKwKSeRAd6G\n0nwxNaYd5YT1BcUVeiGTsUY6GpCniUpz1wiVd9w+eJXSDtEezL/Pr3zeaIKL/orZ\njt96g7jBsYTj66x4yo+z9QOR4GSFeGGaqjUcNnOYN9gZAzp9SYVqbq5ZAgMBAAGj\nYDBeMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUH\nAwIwDAYDVR0TAQH/BAIwADAfBgNVHSMEGDAWgBRUn2jrfmMhDL2qFq1u2junHucp\nSDANBgkqhkiG9w0BAQsFAAOCAQEAz6sIGenZaB2I7N/twrB+VgpLfgAONb5UlLG8\ncVF+2dFt7Xw2ZZT6I0jYC9KvkTeAL95xst5rH56lHHje0KTaBFylvBWvlb5a1G42\nZGbvHaXObgeJlxlNVO2jQRp2GD6sFfEgT2HjAjmHwulWl3yV146Sh+ayxxRiEals\noqCPKpc3MHp7ywbwMbkDjPDCI14n/rQhj+d+99xkl4DuKXTIcKKvSvecvYXJvxpm\nKQvyIXERuHifyC5ja4LwxxcW8vCE7L0cq7l4FTAHkHcSdBc11lGFsadvWbZgwm5r\nG8EN9RfbbIdXoSZzrhJ9anRXPBzzR9at4u4dzEt51OyTcFlHLQ==\n-----END CERTIFICATE-----\n",
+            "client_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEA2HbdkU+I6rXHS6eKR43rGYS011chnK3MKPFPzV0RQCswLM50\nGoM23rMmBaUfL9HLrxIdTdH25bxWl/JAGLHuONUDxc4KKaJNCIugym3fV9mnOoOy\ngWzIevwdi6ZqEoe68n6kmC7nHzXanZjj4lyIYvB1KF7QR/jzUJ2O/n/D5TLL5Ah7\nZ1L6YEAHHesG7iRQR0E1ZAIIwGWcwDK3mZJysCknkQHehtJ8MTWmHeWE9QXFFXoh\nk7FGOhqQp4lKc9cIlXfcPniV0g7RHsy/z6983miCi/6K2Y7feoO4wbGE4+useMqP\ns/UDkeBkhXhhmqo1HDZzmDfYGQM6fUmFam6uWQIDAQABAoIBAHOzpV7EWnTKUQp5\nNQpmKyHqsxbfNdIfe57uzS8B7fSUoR1yBNEfDbcfntUpm2/d/bdIQW2VKxlFACwb\ninMouCKciXWzWe9DF1XX/Ev3SogUiLRYLJPNZ6OFGu3IN65L6nsvgh7uAw/Fo2LV\nlAksWKI50QWRGFdAFB4k+YfDFxxsfFuWwLnxGpne8TEcYknXpCiPwbvmXaicOdF5\noVZ3qzDCtTZ3ibxWB6MgipgkidATQJsTxGJlnduUzxQlTeEThRt87LXxcJfMxbbn\nAazhSSM1jVLO1PvxI7N4dhrBXJX+8djUALJSlSV12zNc+sO0xGoZgeEtVsOT+T7X\nCdr3U2ECgYEA+AuECxSjkD7SZ9OiGEYJdGGCswJ2kdrntkb6Isuvtuf2YPkER0ZP\ndRQ5EM8rUTK3uXIOCCQo49MUwoG4Cs1w7aQBX77kvL32HvaKNF0R3ZKf/x8vSav6\nAlWY+sUg1KsdZPCJ6y7erc7aaxcg+4SL/jFmTBuL94MAmcjhhDxldWUCgYEA32gR\naH+Sg8KPDlPvQKpmcENvAq7kZES7FHUw5uMhSu2ss/bbm2dkaElux8lNx9vgCkbT\nr+vXmfp+Yf8j+apktyMzdKhmJ3/HCiXyAY+QJWjDB0nRUSXRyT9P9hpxvITIjRO4\nSwYBik5hRqN/poJHuSPNN3FVxky0ljCYwjbAz+UCgYEA8TeZuIDgs2U0jr3T09FA\nXop5ZQZPMnZ0geGyXWZBwhkAk7t2uq2Yld4NxNgDYxp0awaMuMQZc70RYjpuNSsm\n2CN3JpporVf64o+VRWkA974glCTKgtWY8u41MCHGVKr3kfMN3MWezd3ssNo0PATh\nc1itB/R+ADzIt8UP8t4dOLUCgYEAz95yDCxfdE+sciVxAVdL13s3KGT4x78X3zIn\nnT2K9b/uKMkxjwiF6W8iL6zDvYl9jbJXN2IXCwODYsVWgPClo62SLCKgYnJHDc8+\nvWsKMXSnuvlZVMr+xuUtDo2OdF2MiY/ms4/UEQ9a/bIVjSW9fKuuP78pk0g94102\nVcdCYm0CgYBrFqPmavukPZLeSFavoR8ZmpXJt5Q9aAoo8bbp0FCPmE0JrF5OS8Yd\nhqXKx9RqP7/kJdGdZzexF07vpmC76+cYAqrGnBrd7fgnxkNh/T7yRI3MGt9Jj6jJ\n4BvFTBVwbVQAYQVu5ILHxYNlASrHsjtzzsZtvZ2498S+tBWm4YF03g==\n-----END RSA PRIVATE KEY-----\n",
             "cluster_ca_certificate": "-----BEGIN CERTIFICATE-----\nMIIDBjCCAe6gAwIBAgIBATANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwptaW5p\na3ViZUNBMB4XDTI1MDEwMzA2MTkwN1oXDTM1MDEwMjA2MTkwN1owFTETMBEGA1UE\nAxMKbWluaWt1YmVDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANlO\nB/vWXLg+8HYjn+O40Ak2NaTN05axe9gO6WXlTv/sSDUkoz5hEagULELr6SgNLsCu\nFR6WsGnDDAtkoHrUpViHwZta2lHZ5A4rcsDbXLez4tGdzMzba6JJOVRJNIiWNSl4\nHcjkqiGCJhr512e+TYH8Ur+IIMI4VM9H2pTZt3U//5NOI7jWQm/45tkJUEnd7P6c\nojzcBCN5+v/gICIDSkSVMNRm7EF09EYjs73fVMIckwUP+ffWX2kNmMzIaa3kbq8m\n6IKBa7WAN9vmPRoTuoZKVMglADE1/p4hhCBl27OPZT6qq91/rzThw/73McpcjNZn\njkYLWo29OE5/BKNvVZMCAwEAAaNhMF8wDgYDVR0PAQH/BAQDAgKkMB0GA1UdJQQW\nMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQW\nBBRUn2jrfmMhDL2qFq1u2junHucpSDANBgkqhkiG9w0BAQsFAAOCAQEADf5VkoEa\n+i6VERv2eS60sHgRWCyILknmF8/O7/LV2EUeMlgqJHttL3Vvdn9rZ+U8jVG3tGiK\nqFogz68mfma/PQCofVNC51hPetVwFLO1D702F/egAt0bBYzdt59gficMqAFJ3DoJ\nad1k4jsDBXUrE0XPj6AHkFgIFDSxpfkp96MY5MYZ5Sw89rhRzFW1MfjLRvtQGXCp\nCNHucPwn9Zuq//pZHNLIEZ9YswchRGl5C6F4Sv5eAgF+o31MEohULuPEIT6h1ycE\nRmMWw71dcAkhPASP4aSaD5V99+P7SZZar+OXtsENfUG4x5ZUkt+rnasgYo0mM5G1\nSXFodoxcLCyEBg==\n-----END CERTIFICATE-----\n",
             "cluster_name": "complete-devops-project",
             "cni": "",
@@ -57,7 +134,7 @@
             "force_systemd": false,
             "gpus": null,
             "ha": false,
-            "host": "https://127.0.0.1:57375",
+            "host": "https://127.0.0.1:52874",
             "host_dns_resolver": true,
             "host_only_cidr": "192.168.59.1/24",
             "host_only_nic_type": "virtio",

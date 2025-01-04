@@ -1,6 +1,6 @@
 image:
   repository: thedevopsdude/complete-devops-project
-  tag: ce8829a
+  tag:fd08229 
   pullPolicy: IfNotPresent
 
 service:

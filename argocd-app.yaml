@@ -1,4 +1,4 @@
-apiVersion: argoProj.io/v1alpha1
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: complete-devops-project
@@ -15,4 +15,4 @@ spec:
   syncPolicy: 
     automated:
       prune: true
-      selfHeal: true  
+      selfHeal: true

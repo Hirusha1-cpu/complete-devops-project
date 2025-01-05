@@ -1,6 +1,6 @@
 image:
   repository: thedevopsdude/complete-devops-project
-  tag: ce8829a    # Added space after the colon
+  tag:aef2556 
   pullPolicy: IfNotPresent
 
 service:

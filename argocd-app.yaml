@@ -11,8 +11,8 @@ spec:
     path: complete-devops-project-time-printer
   destination: 
     server: "https://kubernetes.default.svc"
-    namespace: default  
-  syncPolicy: 
+    namespace: default
+  syncPolicy:
     automated:
       prune: true
       selfHeal: true

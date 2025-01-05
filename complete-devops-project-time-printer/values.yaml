@@ -1,6 +1,6 @@
 image:
   repository: hirudoc5/complete-devops-project
-  tag: latest 
+  tag:6442601 
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP

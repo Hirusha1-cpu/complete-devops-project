@@ -1,6 +1,6 @@
 image:
   repository: thedevopsdude/complete-devops-project
-  tag: latest 
+  tag:cc63d50 
   pullPolicy: IfNotPresent
 
 service:
